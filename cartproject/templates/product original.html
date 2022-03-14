@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    {{product.desc|truncatewords:155}}
+    Welcome to Apple cart where you can buys different items....
+
+{% endblock %}
+
+{% block title %}
+
+    {{product.name}}-Apple cart
+
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        <p><a href="{% url 'cartapp:allprodcat' %}">Home</a> | <a href="{{product.cat.get_url}}">{{product.cat}}</a> | {{product.name}}</p>
+    </div>
+</div>
+<br>
+<div>
+    <div>
+        <div>
+            <img src="{{product.img.url}}" alt="{{product.name}}">
+        </div>
+    </div>
+    <div>
+        <div>
+            <h1>{{product.name}}</h1>
+            <p>${{product.price}}</p>
+            <p>Product Description</p>
+            <p>{{product.desc}}</p>
+            {% if product.stock <= 0 %}
+            <p><b>Out of stock</b></p>
+            {% else %}
+            <a href="">Add to cart</a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

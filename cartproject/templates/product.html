@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    {{product.desc|truncatewords:155}}
+    Welcome to Apple cart where you can buys different items....
+
+{% endblock %}
+
+{% block title %}
+
+    {{product.name}}-Apple cart
+
+{% endblock %}
+
+{% block content %}
+<div class="row my_prod_row_class">
+    <div class="mx_auto">
+        <p><a href="{% url 'cartapp:allprodcat' %}">Home</a> | <a href="{{product.cat.get_url}}">{{product.cat}}</a> | {{product.name}}</p>
+    </div>
+</div>
+
+<div class="container">
+    <br>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem;">
+            <img  style="width:300px; height:400;" src="{{product.img.url}}" alt="{{product.name}}">
+        </div>
+    </div>
+
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+            <p style="letter-spacing: 0.2em; text-transform:uppercase; font-size:25px;">{{product.name}}</p>
+            <p>${{product.price}}</p>
+            <p class="my_title">Product Description</p>
+            <p class="text-justify my_prod_text">{{product.desc}}</p>
+            {% if product.stock <= 0 %}
+            <p class="text-justify my_prod_text"><b>Out of stock</b></p>
+            {% else %}
+            <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to cart</a>
+            {% endif %}
+        </div>
+            </div>
+
+    </div>
+
+
+    </div>
+
+{% endblock %}

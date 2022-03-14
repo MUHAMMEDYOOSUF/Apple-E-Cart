@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+ {% if category %}
+    {{category.desc|truncatewords:155}}
+ {% else %}
+    Welcome to Apple cart where you can buys different items....
+ {% endif %}
+{% endblock %}
+
+{% block title %}
+ {% if category %}
+    {{category.name}}-Apple cart
+ {% else %}
+    See our New collections- Apple cart
+ {% endif %}
+{% endblock %}
+
+
+{% block content %}
+ {% if category %}
+
+<div>
+    <p><a href="{% url 'cartapp:allprodcat' %}">Our product collections</a></p>
+</div>
+
+ {% endif %}
+
+
+    {% if category %}
+    <div>
+    <img src="{{category.img.url}}" alt="{{category.name}}">
+</div>
+<br>
+<div>
+    <h1>{{category.name}}</h1>
+    <p>{{category.desc}}</p>
+</div>
+
+    {% else %}
+
+<div>
+    <img src="{% static 'img/banner.png' %}" alt="Our products" width="1335" height="500">
+</div>
+<br>
+<div>
+    <h1>Our products collections</h1>
+    <p>We have a wide variety of products ,you can select whichever you want</p>
+</div>
+ {% endif %}
+
+    {% for i in products %}
+    <div>
+        <div>
+        <a href="{{i.get_url}}"><img src="{{i.img.url}}" alt="{{i.name}}"></a>
+        </div>
+        <div>
+         <h4>{{i.name}}</h4>
+        <p>{{i.price}}</p>
+</div>
+
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+
